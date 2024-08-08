@@ -5,7 +5,7 @@ import {
     DownloadOutlined,
   } from '@ant-design/icons';
 import { Button, Layout, Menu } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 
 
@@ -14,6 +14,7 @@ const MainLayout = (props) => {
     const bgColor = '#f0f0f0';
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     return (
         <Layout>
@@ -21,9 +22,9 @@ const MainLayout = (props) => {
                 <Menu
                     theme="dark"
                     mode="inline"
-                    defaultSelectedKeys={['group1']}
+                    defaultSelectedKeys={['personal_accounts']}
                     onClick={(info) => {
-                        navigate(info.key)          
+                        navigate(".", window.origin + location.pathname + "/" + info.key)          
                     }}
                     items={[
                         {

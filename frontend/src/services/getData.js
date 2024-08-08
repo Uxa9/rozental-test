@@ -3,7 +3,6 @@ import dataArr from '../mock/dataArr.json';
 
 const getData = (filters, pagination) => {
     let list = dataArr.data.list;
-    console.log(filters);
     
     if (filters.accountNumber)
         list = list.filter(item => item.account.includes(filters.accountNumber));
@@ -24,7 +23,7 @@ const getData = (filters, pagination) => {
         list = list.filter(item => item.is_residential == filters.is_residential);
     }
 
-    if (filters.company != null) {
+    if (filters.company != null && filters.company.length != 0) {
         list = list.filter(item => filters.company.includes(item.company.toString()));
     }
 
@@ -36,7 +35,6 @@ const getData = (filters, pagination) => {
         list = list.filter(item => item.address.includes(filters.address));
     }
     
-    console.log(list);
     const total = list.length
 
     if (pagination) list = list.slice((pagination.page-1) * pagination.perPage, (pagination.page-1) * pagination.perPage + pagination.perPage);

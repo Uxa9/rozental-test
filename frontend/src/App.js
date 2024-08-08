@@ -10,9 +10,7 @@ const App = (props) => {
         <BrowserRouter>
             <MainLayout>
                 <Routes>
-                    <Route path='' element={<>Welcome page</>} />
-                    <Route path='personal_accounts' element={<PersonalAccounts/>} />
-                    <Route path='*' element={<>Page Not Found</>} />
+                    <Route path='*' element={<PersonalAccounts/>} />
                 </Routes>
             </MainLayout>
         </BrowserRouter>
