@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/rozental-test/static/css/main.a7f05f27.css",
-    "main.js": "/rozental-test/static/js/main.61430950.js",
+    "main.js": "/rozental-test/static/js/main.374b67ef.js",
     "static/js/453.8ab44547.chunk.js": "/rozental-test/static/js/453.8ab44547.chunk.js",
     "index.html": "/rozental-test/index.html",
     "main.a7f05f27.css.map": "/rozental-test/static/css/main.a7f05f27.css.map",
-    "main.61430950.js.map": "/rozental-test/static/js/main.61430950.js.map",
+    "main.374b67ef.js.map": "/rozental-test/static/js/main.374b67ef.js.map",
     "453.8ab44547.chunk.js.map": "/rozental-test/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a7f05f27.css",
-    "static/js/main.61430950.js"
+    "static/js/main.374b67ef.js"
   ]
 }
