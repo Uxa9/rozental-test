@@ -2,6 +2,7 @@ package start
 
 import (
 	"backend/internal/cmd/app"
+	"backend/internal/config"
 	"context"
 	"errors"
 	"fmt"
@@ -40,7 +41,7 @@ func StartServer(app *app.App) error {
 	//api := router.Group("/api")
 
 	httpServer := &http.Server{
-		Addr:           ":8080",
+		Addr:           ":" + config.Yaml.ServerConfig.Port,
 		Handler:        router,
 		MaxHeaderBytes: 1 << 20,
 	}

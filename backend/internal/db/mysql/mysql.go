@@ -10,7 +10,7 @@ import (
 
 func InitMysqlService() *gorm.DB {
 
-	mysqlDBConn := getMysqlConfigYaml(config.Yaml)
+	mysqlDBConn := getMysqlConfigYaml(config.Yaml.MySqlConfig)
 
 	var gormConfig gorm.Config
 

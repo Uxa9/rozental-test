@@ -7,6 +7,11 @@ import (
 	"os"
 )
 
+type Config struct {
+	MySqlConfig
+	ServerConfig
+}
+
 type MySqlConfig struct {
 	Host                  string
 	Port                  string
@@ -16,7 +21,11 @@ type MySqlConfig struct {
 	MaxLengthArrayInQuery int
 }
 
-var Yaml MySqlConfig
+type ServerConfig struct {
+	Port string
+}
+
+var Yaml Config
 
 func FillConfig() {
 
@@ -24,11 +33,13 @@ func FillConfig() {
 		log.Fatalf(err.Error())
 	}
 
-	Yaml.Host = checkStringParameter("mysql.host")
-	Yaml.Port = checkStringParameter("mysql.port")
-	Yaml.User = checkStringParameter("mysql.user")
-	Yaml.Password = checkStringParameter("mysql.password")
-	Yaml.Db = checkStringParameter("mysql.db")
+	Yaml.MySqlConfig.Host = checkStringParameter("mysql.host")
+	Yaml.MySqlConfig.Port = checkStringParameter("mysql.port")
+	Yaml.MySqlConfig.User = checkStringParameter("mysql.user")
+	Yaml.MySqlConfig.Password = checkStringParameter("mysql.password")
+	Yaml.MySqlConfig.Db = checkStringParameter("mysql.db")
+
+	Yaml.ServerConfig.Port = checkStringParameter("server.port")
 
 	if viper.IsSet("MaxLengthArrayInQuery") {
 		Yaml.MaxLengthArrayInQuery = viper.GetInt("MaxLengthArrayInQuery")
