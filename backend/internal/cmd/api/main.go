@@ -2,6 +2,7 @@ package main
 
 import (
 	"backend/internal/cmd/app"
+	"backend/internal/cmd/entity"
 	"backend/internal/cmd/start"
 	"backend/internal/config"
 	"backend/internal/db/mysql"
@@ -11,6 +12,8 @@ import (
 
 func initialization() (ctx context.Context, mysqlDb *gorm.DB) {
 	config.FillConfig()
+
+	entity.Init()
 
 	ctx = context.TODO()
 	mysqlDb = mysql.InitMysqlService()

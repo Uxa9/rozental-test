@@ -1,14 +1,20 @@
 package app
 
-import "gorm.io/gorm"
+import (
+	"backend/modules/user"
+	userModuleUseCase "backend/modules/user/usecase"
+	"gorm.io/gorm"
+)
 
 type App struct {
-	Mysql *gorm.DB
+	Mysql        *gorm.DB
+	UserModuleUC user.UseCaseInterface
 }
 
 func NewApp(gormMysql *gorm.DB) *App {
 	return &App{
-		Mysql: gormMysql,
+		Mysql:        gormMysql,
+		UserModuleUC: userModuleUseCase.NewUserModuleUseCase(gormMysql),
 	}
 }
 

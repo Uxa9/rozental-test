@@ -3,6 +3,7 @@ package start
 import (
 	"backend/internal/cmd/app"
 	"backend/internal/config"
+	userHttp "backend/modules/user/delivery/http"
 	"context"
 	"errors"
 	"fmt"
@@ -33,12 +34,9 @@ func StartServer(app *app.App) error {
 		c.Next()
 	})
 
-	router.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	//api := router.Group("/api")
+	api := router.Group("/api")
+
+	userHttp.RegisterHTTPEndPoints(api, app)
 
 	httpServer := &http.Server{
 		Addr:           ":" + config.Yaml.ServerConfig.Port,
