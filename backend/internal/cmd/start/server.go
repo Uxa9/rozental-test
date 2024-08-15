@@ -3,6 +3,7 @@ package start
 import (
 	"backend/internal/cmd/app"
 	"backend/internal/config"
+	inventoryOperationHttp "backend/modules/inventory-operation/delivery/http"
 	userHttp "backend/modules/user/delivery/http"
 	"context"
 	"errors"
@@ -37,6 +38,7 @@ func StartServer(app *app.App) error {
 	api := router.Group("/api")
 
 	userHttp.RegisterHTTPEndPoints(api, app)
+	inventoryOperationHttp.RegisterHTTPEndPoints(api, app)
 
 	httpServer := &http.Server{
 		Addr:           ":" + config.Yaml.ServerConfig.Port,

@@ -27,7 +27,7 @@ func InitMysqlService() *gorm.DB {
 
 func getMysqlConfig(user, password, host, port, dbName string) (dbConn *sql.DB) {
 
-	dbConn, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+	dbConn, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
 		user,
 		password,
 		host,
@@ -45,7 +45,7 @@ func getMysqlConfig(user, password, host, port, dbName string) (dbConn *sql.DB) 
 // overload 🥴🥴🥴
 func getMysqlConfigYaml(sqlConfig config.MySqlConfig) (dbConn *sql.DB) {
 
-	dbConn, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+	dbConn, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
 		sqlConfig.User,
 		sqlConfig.Password,
 		sqlConfig.Host,

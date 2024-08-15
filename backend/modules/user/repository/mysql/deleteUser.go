@@ -7,12 +7,12 @@ import (
 )
 
 func (r *MysqlRepository) DeleteUser(id []int) error {
-	client := r.client.Table(entity.User.UserTable)
+	client := r.client.Table(entity.User.Table)
 	tx := client.Delete(models.UserObject{}, &id)
 
 	if tx.RowsAffected == 0 {
 		return errors.New("NF")
 	}
-	
+
 	return tx.Error
 }
