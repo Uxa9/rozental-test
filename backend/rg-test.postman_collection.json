@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "441416f4-f700-4bff-88c2-22bc185ba6fb",
+		"name": "rg-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23157779"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"Jma\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/user?id=2, 4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2, 4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 10,\r\n    \"Name\": \"jmisha\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "inventory-operations",
+			"item": [
+				{
+					"name": "Get transactions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"id\": [2],\r\n    // \"src_executor\" : [2, 5],\r\n    // \"dst_executor\" : [1],\r\n    // \"request_time\" : [\"2024-08-14 03:00:00\", \"2024-08-15  15:00:00\"],\r\n    // \"status_time\": [\"2024-08-14 03:00:00\", \"2024-08-15  15:00:00\"],\r\n    // \"status\": [\"accept\"],\r\n    \"\": \"\" // Чтобы запятые не удалять\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/inventory-operation/getOperations",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"inventory-operation",
+								"getOperations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Inventory",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"id\": [1, 2,3],\r\n    \"name\": [\"Молоток\"],\r\n    // \"executor_id\": [5],\r\n    \"status\": [\"accept\"],\r\n    \"\": \"\" // Чтобы запятые не удалять\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/inventory-operation/getInventory",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"inventory-operation",
+								"getInventory"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

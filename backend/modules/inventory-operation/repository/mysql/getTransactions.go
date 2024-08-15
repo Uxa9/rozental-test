@@ -3,7 +3,7 @@ package mysql
 import (
 	"backend/internal/cmd/entity"
 	"backend/modules/inventory-operation/repository/mysql/models"
-	"fmt"
+	"errors"
 	"time"
 )
 
@@ -53,7 +53,8 @@ func (r *MysqlRepository) GetTransactions(filter models.OperationFilter) (result
 
 		if len(filter.RequestTimes) != 0 {
 			if len(filter.RequestTimes) != 2 {
-				err = fmt.Errorf("request times should be 2 values")
+				err = errors.New("request times should be 2 values")
+				return nil, err
 			}
 
 			a, _ := time.Parse("2006-01-02 15:04:05", filter.RequestTimes[0])
@@ -64,7 +65,8 @@ func (r *MysqlRepository) GetTransactions(filter models.OperationFilter) (result
 
 		if len(filter.StatusTimes) != 0 {
 			if len(filter.StatusTimes) != 2 {
-				err = fmt.Errorf("status times should be 2 values")
+				err = errors.New("status times should be 2 values")
+				return nil, err
 			}
 
 			a, _ := time.Parse("2006-01-02 15:04:05", filter.StatusTimes[0])
