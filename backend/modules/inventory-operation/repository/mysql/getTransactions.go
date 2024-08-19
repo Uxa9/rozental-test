@@ -2,14 +2,15 @@ package mysql
 
 import (
 	"backend/internal/cmd/entity"
+	resultModels "backend/modules/inventory-operation/delivery/http/models"
 	"backend/modules/inventory-operation/repository/mysql/models"
 	"errors"
 	"time"
 )
 
-func (r *MysqlRepository) GetTransactions(filter models.OperationFilter) (result models.OperationsResult, err error) {
+func (r *MysqlRepository) GetTransactions(filter models.OperationFilter) (result resultModels.OperationsResult, err error) {
 
-	result = models.OperationsResult{}
+	result = resultModels.OperationsResult{}
 	client := r.client.Table(entity.InventoryOperation.Table)
 
 	client.Select("" +
@@ -21,16 +22,12 @@ func (r *MysqlRepository) GetTransactions(filter models.OperationFilter) (result
 		"`inventory_operations`.`status` AS statusId, " +
 		"`inventory_operation_status`.`id` AS idStatus, " +
 		"`inventory_operation_status`.`name` AS nameStatus, " +
-		"`u1`.`name` AS nameSrcExecutor, " +
-		"`u2`.`name` AS nameDstExecutor, " +
 		"`inventory_operations_detail`.`inventory_id` AS idInventory, " +
 		"`inventory`.`name` AS inventoryName ",
 	)
 	client.Joins("" +
 		"JOIN `inventory_operation_status` ON " +
 		"`inventory_operations`.`status` = `inventory_operation_status`.`id` " +
-		"JOIN `user` u1 ON u1.`id` = `inventory_operations`.`src_executor` " +
-		"JOIN `user` u2 ON u2.`id` = `inventory_operations`.`dst_executor`" +
 		"JOIN `inventory_operations_detail` ON `inventory_operations_detail`.`operation_id` = `inventory_operations`.`id`" +
 		"JOIN `inventory` ON `inventory_operations_detail`.`inventory_id` = `inventory`.`id`",
 	)

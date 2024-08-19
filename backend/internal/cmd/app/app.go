@@ -15,10 +15,15 @@ type App struct {
 }
 
 func NewApp(gormMysql *gorm.DB) *App {
+	inventoryOperationUC := inventoryOperationUseCase.NewInventoryOperationsModuleUseCase(gormMysql)
+	userModuleUC := userModuleUseCase.NewUserModuleUseCase(gormMysql)
+
+	inventoryOperationUC.SetUserUseCase(userModuleUC)
+
 	return &App{
 		Mysql:                gormMysql,
-		UserModuleUC:         userModuleUseCase.NewUserModuleUseCase(gormMysql),
-		InventoryOperationUC: inventoryOperationUseCase.NewInventoryOperationsModuleUseCase(gormMysql),
+		UserModuleUC:         userModuleUC,
+		InventoryOperationUC: inventoryOperationUC,
 	}
 }
 

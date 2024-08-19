@@ -8,5 +8,6 @@ import (
 func (r *MysqlRepository) CreateUser(name string) error {
 	client := r.client.Table(entity.User.Table)
 	user := models.UserObject{Name: name}
+
 	return client.Create(&user).Error
 }

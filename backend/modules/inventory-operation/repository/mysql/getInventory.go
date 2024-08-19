@@ -2,20 +2,19 @@ package mysql
 
 import (
 	"backend/internal/cmd/entity"
+	resultModels "backend/modules/inventory-operation/delivery/http/models"
 	"backend/modules/inventory-operation/repository/mysql/models"
 )
 
-func (r *MysqlRepository) GetInventory(filter models.InventoryFilters) (models.InventoryOperationResultsNested, error) {
+func (r *MysqlRepository) GetInventory(filter models.InventoryFilters) (resultModels.InventoryOperationResultsNested, error) {
 
-	result := models.InventoryOperationResults{}
+	result := resultModels.InventoryOperationResults{}
 	client := r.client.Table(entity.Inventory.Table)
 
 	client.Select("" +
 		"`inventory`.`id`, " +
 		"`inventory`.`name`, " +
 		"`inventory`.`id_executor` AS `idSrcExecutor`, " +
-		"u1.name AS `nameSrcExecutor`, " +
-		"u2.name AS `nameDstExecutor`, " +
 		"`inventory_operation_status`.`name` AS `statusName`, " +
 		"`inventory_operations`.`id` AS `operationId`, " +
 		"`inventory_operations`.`request_time`, " +
@@ -26,10 +25,8 @@ func (r *MysqlRepository) GetInventory(filter models.InventoryFilters) (models.I
 	)
 
 	client.Joins("" +
-		"JOIN `user` u1 ON `u1`.`id` = `inventory`.`id_executor`" +
 		"JOIN `inventory_operations_detail` ON `inventory_operations_detail`.`inventory_id` = `inventory`.`id`" +
 		"JOIN `inventory_operations` ON `inventory_operations`.`id` = `inventory_operations_detail`.`operation_id`" +
-		"JOIN `user` u2 ON `u2`.`id` = `inventory_operations`.`dst_executor`" +
 		"JOIN `inventory_operation_status` ON `inventory_operation_status`.`id` = `inventory_operations`.`status`",
 	)
 
@@ -55,7 +52,7 @@ func (r *MysqlRepository) GetInventory(filter models.InventoryFilters) (models.I
 		client.Find(&result)
 	}
 
-	var a []models.InventoryOperationResultNested
+	var a []resultModels.InventoryOperationResultNested
 
 	for i, _ := range result {
 		double := false
@@ -67,11 +64,11 @@ func (r *MysqlRepository) GetInventory(filter models.InventoryFilters) (models.I
 			}
 		}
 		if !double {
-			a = append(a, models.InventoryOperationResultNested{
+			a = append(a, resultModels.InventoryOperationResultNested{
 				Id:           result[i].Id,
 				Name:         result[i].Name,
 				Executor:     result[i].Executor,
-				Transactions: []models.InventoryOperation{result[i].Transaction},
+				Transactions: []resultModels.InventoryOperation{result[i].Transaction},
 			})
 		}
 	}

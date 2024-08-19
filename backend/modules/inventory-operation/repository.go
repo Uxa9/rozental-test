@@ -1,8 +1,11 @@
 package inventory_operation
 
-import "backend/modules/inventory-operation/repository/mysql/models"
+import (
+	resultModels "backend/modules/inventory-operation/delivery/http/models"
+	"backend/modules/inventory-operation/repository/mysql/models"
+)
 
 type MysqlRepoInterface interface {
-	GetTransactions(filter models.OperationFilter) (models.OperationsResult, error)
-	GetInventory(filter models.InventoryFilters) (models.InventoryOperationResultsNested, error)
+	GetTransactions(filter models.OperationFilter) (resultModels.OperationsResult, error)
+	GetInventory(filter models.InventoryFilters) (resultModels.InventoryOperationResultsNested, error)
 }

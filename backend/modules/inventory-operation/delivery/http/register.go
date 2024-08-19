@@ -6,7 +6,7 @@ import (
 )
 
 func RegisterHTTPEndPoints(router *gin.RouterGroup, app *app.App) {
-	h := NewHandler(app.InventoryOperationUC)
+	h := NewHandler(app.InventoryOperationUC, app.UserModuleUC)
 
 	endpoints := router.Group("inventory-operation")
 	{

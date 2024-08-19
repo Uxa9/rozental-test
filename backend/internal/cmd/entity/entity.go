@@ -27,6 +27,10 @@ var InventoryOperationDetail = struct {
 	Table string
 }{}
 
+var Status = struct {
+	Table string
+}{}
+
 func Init() {
 	User.Table = "user"
 	User.name = "name"
@@ -43,4 +47,6 @@ func Init() {
 	InventoryOperationStatus.Table = "inventory_operations_status"
 
 	Inventory.Table = "inventory"
+
+	Status.Table = "inventory_operation_status"
 }

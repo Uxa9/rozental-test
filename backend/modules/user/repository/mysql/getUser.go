@@ -6,7 +6,6 @@ import (
 )
 
 func (r *MysqlRepository) GetUser(filters models.UsersObject) (result models.UserObjects, err error) {
-
 	client := r.client.Table(entity.User.Table)
 
 	if len(filters.Ids) == 0 && len(filters.Names) == 0 {
