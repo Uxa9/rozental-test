@@ -1,0 +1,17 @@
+@use "../../styles/styles.scss" as styles;
+
+.button {
+    width: 100%;
+    height: styles.$sizes-height-sm;
+    background-color: styles.$colors-primary;
+    color: styles.$colors-secondary;
+
+    cursor: pointer;
+
+    outline: none;
+    border: none;
+
+    border-radius: styles.$sizes-height-sm;
+
+    @include styles.highlight-hover;
+}

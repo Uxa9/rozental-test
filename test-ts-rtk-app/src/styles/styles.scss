@@ -1,0 +1,21 @@
+@forward './colors.scss' as colors-*;
+@forward './size-constraints.scss' as sizes-*;
+@use './colors.scss' as colors;
+
+@mixin highlight-hover {
+    transition: filter .5s;
+
+    &:hover {
+        filter: brightness(1.5);
+    }
+}
+
+@mixin drop-shadow-hover {
+    transition: transform .5s, filter .5s;
+
+    &:hover {
+        transform: translate(5px, -5px);
+    
+        filter: drop-shadow(-5px 5px colors.$secondary);
+    }
+}

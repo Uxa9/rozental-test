@@ -1,0 +1,23 @@
+@use "../../styles/styles.scss" as styles;
+
+.element-view {
+    // height: 300px;
+    min-width: 400px;
+
+    box-sizing: border-box;
+    padding: styles.$sizes-spacing-sm;
+    cursor: pointer;
+    
+    border-radius: 36px;
+    background-color: white;
+
+    @include styles.drop-shadow-hover;
+}
+
+.element-image {
+    height: 300px;
+    width: 100%;
+
+    object-fit: contain;
+    object-position: center;
+}

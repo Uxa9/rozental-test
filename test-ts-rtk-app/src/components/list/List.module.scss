@@ -1,0 +1,12 @@
+@use "../../styles/styles.scss" as styles;
+
+.list-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+}
+
+.list-element {
+    margin: styles.$sizes-spacing-sm;
+}

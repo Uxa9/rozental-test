@@ -1,0 +1,55 @@
+@use "../../styles/styles.scss" as styles;
+
+.header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 styles.$sizes-spacing-sm;    
+
+    border-bottom: 1px solid styles.$colors-secondary;
+    box-sizing: border-box;
+
+    color: styles.$colors-primary;
+}
+
+.company-info {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.app-logo,
+.cart-logo {
+    aspect-ratio: 1/1;
+    height: 80%;
+    cursor: pointer;
+    object-fit: cover;
+
+    @include styles.highlight-hover;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .app-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.cart-logo {
+    height: 40%;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.active-button {
+    text-indent: styles.$sizes-spacing-sm;
+    cursor: pointer;
+    @include styles.highlight-hover
+}

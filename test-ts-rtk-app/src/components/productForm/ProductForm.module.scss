@@ -1,0 +1,12 @@
+@use "../../styles/styles.scss" as styles;
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+
+    input {
+        margin-bottom: styles.$sizes-spacing-sm;
+    }
+}

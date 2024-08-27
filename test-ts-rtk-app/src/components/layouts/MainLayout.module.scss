@@ -1,0 +1,10 @@
+@use "../../styles/styles.scss" as styles;
+
+.content-wrapper {
+    box-sizing: border-box;
+    margin: styles.$sizes-spacing-sm;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

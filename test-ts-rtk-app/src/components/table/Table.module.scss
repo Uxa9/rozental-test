@@ -1,0 +1,13 @@
+@use "../../styles/styles.scss" as styles;
+
+.table-layout {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.table-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

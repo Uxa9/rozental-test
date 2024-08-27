@@ -1,0 +1,29 @@
+@use "../../styles/styles.scss" as styles;
+
+.element-view {
+    display: flex;
+    height: 80px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+
+    >div {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    img {
+        height: 100%;
+        margin-right: 16px;
+    }
+
+    button {
+        width: 36px;
+    }
+}
+
+.wipe-button {
+    margin-top: 20px;
+    width: 300px;
+}
