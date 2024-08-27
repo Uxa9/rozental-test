@@ -2,12 +2,12 @@ package mysql
 
 import (
 	"backend/internal/cmd/entity"
-	"backend/modules/status/repository/mysql/models"
+	"backend/modules/status/repository/mysql/model"
 )
 
-func (r *MysqlRepository) CreateStatus(name string) error {
+func (r *MysqlRepository) CreateNewStatus(name string) error {
 	client := r.client.Table(entity.Status.Table)
-	user := models.StatusObject{Name: name}
+	status := model.StatusObject{Name: name}
 
-	return client.Create(&user).Error
+	return client.Create(&status).Error
 }

@@ -19,15 +19,11 @@ func (r *MysqlRepository) GetTransactions(filter models.OperationFilter) (result
 		"`inventory_operations`.`dst_executor` AS idDstExecutor, " +
 		"`inventory_operations`.`request_time`, " +
 		"`inventory_operations`.`status_time`, " +
-		"`inventory_operations`.`status` AS statusId, " +
-		"`inventory_operation_status`.`id` AS idStatus, " +
-		"`inventory_operation_status`.`name` AS nameStatus, " +
 		"`inventory_operations_detail`.`inventory_id` AS idInventory, " +
+		"`inventory_operations`.`status` AS `statusId`, " +
 		"`inventory`.`name` AS inventoryName ",
 	)
 	client.Joins("" +
-		"JOIN `inventory_operation_status` ON " +
-		"`inventory_operations`.`status` = `inventory_operation_status`.`id` " +
 		"JOIN `inventory_operations_detail` ON `inventory_operations_detail`.`operation_id` = `inventory_operations`.`id`" +
 		"JOIN `inventory` ON `inventory_operations_detail`.`inventory_id` = `inventory`.`id`",
 	)

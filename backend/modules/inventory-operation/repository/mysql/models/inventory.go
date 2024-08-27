@@ -6,3 +6,9 @@ type InventoryFilters struct {
 	ExecutorId []int    `json:"executor_id"`
 	Status     []string `json:"status"`
 }
+
+type Inventory struct {
+	Id         int    `gorm:"primary_key;column:id"`
+	Name       string `gorm:"column:name"`
+	ExecutorId int    `gorm:"column:id_executor"`
+}

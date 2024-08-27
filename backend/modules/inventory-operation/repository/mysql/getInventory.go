@@ -15,19 +15,16 @@ func (r *MysqlRepository) GetInventory(filter models.InventoryFilters) (resultMo
 		"`inventory`.`id`, " +
 		"`inventory`.`name`, " +
 		"`inventory`.`id_executor` AS `idSrcExecutor`, " +
-		"`inventory_operation_status`.`name` AS `statusName`, " +
+		"`inventory_operations`.`status` AS `statusId`, " +
 		"`inventory_operations`.`id` AS `operationId`, " +
 		"`inventory_operations`.`request_time`, " +
 		"`inventory_operations`.`dst_executor` AS `idDstExecutor`, " +
-		"`inventory_operation_status`.`id` AS `idStatus`, " +
-		"`inventory_operation_status`.`name` AS `nameStatus`, " +
 		"`inventory_operations`.`status_time` ",
 	)
 
 	client.Joins("" +
 		"JOIN `inventory_operations_detail` ON `inventory_operations_detail`.`inventory_id` = `inventory`.`id`" +
-		"JOIN `inventory_operations` ON `inventory_operations`.`id` = `inventory_operations_detail`.`operation_id`" +
-		"JOIN `inventory_operation_status` ON `inventory_operation_status`.`id` = `inventory_operations`.`status`",
+		"JOIN `inventory_operations` ON `inventory_operations`.`id` = `inventory_operations_detail`.`operation_id`",
 	)
 
 	if len(filter.Id) == 0 && len(filter.Name) == 0 && len(filter.ExecutorId) == 0 {

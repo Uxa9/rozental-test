@@ -11,4 +11,6 @@ type UseCaseInterface interface {
 	GetInventory(filter models.InventoryFilters) (resultModels.InventoryOperationResultsNested, error)
 	BindUsersWithTransactions(usersFilter users_model.UsersObject, operations resultModels.OperationsResult) (resultModels.OperationsResult, error)
 	BindUsersWithInventory(usersFilter users_model.UsersObject, inventory resultModels.InventoryOperationResultsNested) (resultModels.InventoryOperationResultsNested, error)
+	BindStatusWithTransactions(operations resultModels.OperationsResult) (resultModels.OperationsResult, error)
+	BindStatusWithInventory(inventory resultModels.InventoryOperationResultsNested) (resultModels.InventoryOperationResultsNested, error)
 }
