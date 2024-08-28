@@ -24,7 +24,6 @@ const productStoreReducer = (state: Product[] = [], action: productAction) => {
             ...state.slice(deleteIndex + 1)
         ]
     }
-    
     return state
 }
 

@@ -1,27 +1,23 @@
-import { useEffect, useState } from "react"
+import { Key, useEffect, useState } from "react"
 import ElementView from "./elementView"
-import { connect, shallowEqual, useSelector } from "react-redux"
+import { connect, shallowEqual, useDispatch, useSelector } from "react-redux"
 import productStoreDispatcher, { DispatcherProps } from "../../common/productStore/dispatcher"
 import { ProductStoreProps, StateProps, productStoreState } from "../../common/productStore"
 import Table from "../../components/table/Table"
 import { Product } from "../../common/productStore/product"
+import productStoreReducer from "../../common/productStore/reducer"
 
 
-const TableView: React.FC<ProductStoreProps> = (props) => {
-    
-    const [elements, setElements] = useState<Product[]>([])
-    
-    useEffect(() => {
-        setElements(props.elements)
-    }, [props.elements])
+const TableView: React.FC = () => {
+    const productList = useSelector((state: any) => state.products)    
 
     return (
         <>
-            <Table elements={elements.map((element, index) => {
+            <Table elements={productList.map((element: Product, index: Key) => {
                 return (
                     <ElementView
                         key={index}
-                        own={element}
+                        product={element}
                     />
                 )
             })} />
@@ -29,7 +25,4 @@ const TableView: React.FC<ProductStoreProps> = (props) => {
     )
 }
 
-export default connect<StateProps, DispatcherProps>(
-    productStoreState,
-    productStoreDispatcher,
-)(TableView)
+export default TableView

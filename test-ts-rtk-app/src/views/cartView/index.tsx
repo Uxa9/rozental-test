@@ -4,7 +4,7 @@ import { GetRandomSusById } from "../../randomSusAssert";
 import { CartStoreAndOwnProps, CartStoreProps, cartStoreState, cartStoreStateAndProps, StateProps } from "../../common/cart";
 import CartDispatcher, { DispatcherProps as CartDispatcherProps } from "../../common/cart/dispatcher";
 import { DispatcherProps as ProductDispatcherProps } from "../../common/productStore/dispatcher";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { StoreProps, StoreState, StoreDispathcer, CommonStore, StoreDispatcherProps } from "../../common/indexStore";
 import { useState, useEffect } from "react";
 import { Product } from "../../common/productStore/product";
@@ -13,25 +13,25 @@ import ElementView from "./elementView";
 import Button from "../../components/button/Button";
 
 
-const CartView: React.FC<CommonStore> = (props) => {
+const CartView = () => {
 
-    const [elements, setElements] = useState<Product[]>([])
-    const [positionsMap, setPositionsMap] = useState<Map<number, number>>(new Map)
+    const dispatch = useDispatch()
+
+    const { cart, products } = useSelector((state: any) => state)
     const [elementList, setElementList] = useState<any[]>([])
 
-    useEffect(() => {
-        setElements(props.elements)
+    const [positionsMap, setPositionsMap] = useState<Map<number, number>>(new Map)
 
-        const map = props.cart.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map())
-        setPositionsMap(map)
-        
-    }, [ , props.cart])
+    useEffect(() => {
+        const map = cart.reduce((acc: any, e: any) => acc.set(e, (acc.get(e) || 0) + 1), new Map())
+        setPositionsMap(map)        
+    }, [ ,cart])
 
     useEffect(() => {
         let elList: any[] = [];
 
         Array.from(positionsMap.keys()).forEach((key) => {
-            const product = elements.find(el => el.id === key);
+            const product = products.find((el: { id: number; }) => el.id === key);
             const amount = positionsMap.get(key);
 
             if (product && amount) {
@@ -51,16 +51,21 @@ const CartView: React.FC<CommonStore> = (props) => {
         }, 0);
     }
 
+    const handleWipeButton = () => {
+        dispatch(CartDispatcher.wipeCart())
+    }
+
 
     return (
         <>
-            {props.cart.length ?
+            {cart.length ?
                 <>
                     <List elements={elementList.map((item, index) => {
                         return (
                             <ElementView
                                 key={index}
-                                own={item}
+                                product={item.product}
+                                amount={item.amount}
                             />
                         )
                     })
@@ -69,7 +74,7 @@ const CartView: React.FC<CommonStore> = (props) => {
                         Итого: {calculateTotalSum()} ₽
                     </p>
                     <div className={styles["wipe-button"]}>
-                        <Button onClick={props.wipeCart} text="Очистить корзину" />
+                        <Button onClick={handleWipeButton} text="Очистить корзину" />
                     </div>
                 </>
                 :
@@ -79,7 +84,4 @@ const CartView: React.FC<CommonStore> = (props) => {
     )
 }
 
-export default connect<StoreProps, StoreDispatcherProps>(
-    StoreState,
-    StoreDispathcer
-)(CartView)
+export default CartView

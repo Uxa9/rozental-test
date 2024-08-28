@@ -10,16 +10,16 @@ export interface DispatcherProps {
 
 const productStoreDispatcher = {
     addProduct: (payload: Product) => ({
-        type: productActionTypes.add, payload: payload
+        type: productActionTypes.add, payload
     }),
     editProduct: (payload: Product) => ({
-        type: productActionTypes.edit, payload: payload
+        type: productActionTypes.edit, payload
     }),
     removeProduct: (id: number) => ({
         type: productActionTypes.delete, payload: {
             id: id
         }
-    })
+    }),
 }
 
 export default productStoreDispatcher

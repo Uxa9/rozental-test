@@ -4,27 +4,34 @@ import Button from "../../components/button/Button";
 import { GetRandomSusById } from "../../randomSusAssert";
 import { CartStoreAndOwnProps, CartStoreProps, cartStoreState, cartStoreStateAndProps, StateProps } from "../../common/cart";
 import CartDispatcher, { DispatcherProps } from "../../common/cart/dispatcher";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { Product } from "../../common/productStore/product";
 
+type Props = {
+    product: Product
+}
 
-const ElementView: React.FC<CartStoreAndOwnProps> = (props) => {    
-    const navigate = useNavigate();
+const ElementView: React.FC<Props> = (props) => {    
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const { product } = props;
 
     const handleElementClick = () => {
-        navigate(`/product/${props.own.id}`)
+        navigate(`/product/${product.id}`)
     }
 
     const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
-        props.addToCart(props.own.id)
+        dispatch(CartDispatcher.addToCart(product.id))
     }
 
     return (
         <div className={styles["element-view"]} onClick={handleElementClick}>
-            <img src={GetRandomSusById(props.own.id)} alt="product-image" className={styles["element-image"]}/>
+            <img src={GetRandomSusById(product.id)} alt="product-image" className={styles["element-image"]}/>
             <div>
-                <p>{props.own.name}</p>
-                <p>{props.own.price} ₽</p>
+                <p>{product.name}</p>
+                <p>{product.price} ₽</p>
             </div>
             <Button text="Купить" onClick={handleButtonClick}/>
 
@@ -32,7 +39,4 @@ const ElementView: React.FC<CartStoreAndOwnProps> = (props) => {
     )
 }
 
-export default connect<StateProps, DispatcherProps>(
-    cartStoreStateAndProps,
-    CartDispatcher,
-)(ElementView)
+export default ElementView
