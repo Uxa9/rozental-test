@@ -1,4 +1,4 @@
-import { Product } from "../productStore/product"
+import { Product } from "../_productStore/product"
 import { DispatcherProps } from "./dispatcher"
 
 

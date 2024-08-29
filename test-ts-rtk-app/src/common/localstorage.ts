@@ -1,9 +1,15 @@
-export const loadState = () => {
+import { RootState } from "./indexStore";
+
+
+export const loadState = (storeName: string) => {
     const localState = localStorage.getItem("state");
     if (localState === null) {
         return [];
     }
-    return JSON.parse(localState);
+
+    const parsedState = JSON.parse(localState);
+    
+    return parsedState[storeName]
 };
 
 export const saveState = (state: any) => {

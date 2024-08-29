@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Product } from "../../common/productStore/product";
+import { Product } from "../../common/_productStore/product";
 import Button from "../button/Button";
 import styles from "./ProductForm.module.scss"
 

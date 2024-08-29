@@ -1,15 +1,19 @@
-import CartDispatcher from "./cart/dispatcher";
-import CartReducer from "./cart/reducer";
-import productStoreDispatcher, { DispatcherProps as ProductDispatcherProps } from "./productStore/dispatcher";
-import { DispatcherProps as CartDispatcherProps } from "./cart/dispatcher";
-import { Product } from "./productStore/product";
-import productStoreReducer from "./productStore/reducer";
+import CartDispatcher from "./_cart/dispatcher";
+import { CartReducer } from "./cart/slice";
+import productStoreDispatcher, { DispatcherProps as ProductDispatcherProps } from "./_productStore/dispatcher";
+import { DispatcherProps as CartDispatcherProps } from "./_cart/dispatcher";
+import { Product } from "./_productStore/product";
 import { combineReducers } from "redux";
+import { ProductReducer } from "./productStore/slice";
+import { PostReducer } from "./post/slice";
 
 const rootReducer = combineReducers({
     cart: CartReducer,
-    products: productStoreReducer
+    products: ProductReducer,
+    post: PostReducer
 })
+
+export type RootState = ReturnType<typeof rootReducer>
 
 export default rootReducer
 

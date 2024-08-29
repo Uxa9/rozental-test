@@ -3,11 +3,13 @@ import {logo} from "../../icons/index"
 import { Black } from "../../components/images";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button";
-import { Product } from "../../common/productStore/product";
+import { Product } from "../../common/_productStore/product";
 import { GetRandomSusById } from "../../randomSusAssert";
-import { CartStoreAndOwnProps, CartStoreProps, cartStoreState, cartStoreStateAndProps, CartViewProps, StateProps } from "../../common/cart";
-import CartDispatcher, { DispatcherProps } from "../../common/cart/dispatcher";
+import { CartStoreAndOwnProps, CartStoreProps, cartStoreState, cartStoreStateAndProps, CartViewProps, StateProps } from "../../common/_cart";
+import CartDispatcher, { DispatcherProps } from "../../common/_cart/dispatcher";
 import { connect, useDispatch } from "react-redux";
+import { useAppDispatch } from "../..";
+import { removeFromCart } from "../../common/cart/slice";
 
 type Props = {
     product: Product,
@@ -16,11 +18,11 @@ type Props = {
 
 const ElementView: React.FC<Props> = (props) => {    
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
-        dispatch(CartDispatcher.removeFromCart(props.product.id))
+        dispatch(removeFromCart(props.product.id))
     }
 
     return (

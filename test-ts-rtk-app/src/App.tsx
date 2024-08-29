@@ -9,24 +9,12 @@ import { Provider } from 'react-redux';
 import rootReducer from './common/indexStore';
 import { loadState, saveState } from './common/localstorage';
 
-const localStorage = loadState()
-
-const store = configureStore({
-    reducer: rootReducer,
-    preloadedState: localStorage,
-})
-
-store.subscribe(() => {
-    saveState(store.getState())
-})
 
 function App() {
     return (
-        <Provider store={store}>
-            <BrowserRouter>
-                <AppRouter />
-            </BrowserRouter>
-        </Provider>
+        <BrowserRouter>
+            <AppRouter />
+        </BrowserRouter>
     );
 }
 

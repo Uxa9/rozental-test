@@ -1,29 +1,32 @@
 import styles from "./CartView.module.scss";
 import { useNavigate } from "react-router-dom";
 import { GetRandomSusById } from "../../randomSusAssert";
-import { CartStoreAndOwnProps, CartStoreProps, cartStoreState, cartStoreStateAndProps, StateProps } from "../../common/cart";
-import CartDispatcher, { DispatcherProps as CartDispatcherProps } from "../../common/cart/dispatcher";
-import { DispatcherProps as ProductDispatcherProps } from "../../common/productStore/dispatcher";
+import { CartStoreAndOwnProps, CartStoreProps, cartStoreState, cartStoreStateAndProps, StateProps } from "../../common/_cart";
+import CartDispatcher, { DispatcherProps as CartDispatcherProps } from "../../common/_cart/dispatcher";
+import { DispatcherProps as ProductDispatcherProps } from "../../common/_productStore/dispatcher";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { StoreProps, StoreState, StoreDispathcer, CommonStore, StoreDispatcherProps } from "../../common/indexStore";
+import { StoreProps, StoreState, StoreDispathcer, CommonStore, StoreDispatcherProps, RootState } from "../../common/indexStore";
 import { useState, useEffect } from "react";
-import { Product } from "../../common/productStore/product";
+import { Product } from "../../common/_productStore/product";
 import List from "../../components/list/List";
 import ElementView from "./elementView";
 import Button from "../../components/button/Button";
+import { useAppDispatch } from "../..";
+import { wipeCart } from "../../common/cart/slice";
 
 
 const CartView = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const { cart, products } = useSelector((state: any) => state)
-    const [elementList, setElementList] = useState<any[]>([])
+    const { cart, products } = useSelector((state: RootState) => state)
+    const [elementList, setElementList] = useState<any[]>([])    
+    
 
     const [positionsMap, setPositionsMap] = useState<Map<number, number>>(new Map)
 
     useEffect(() => {
-        const map = cart.reduce((acc: any, e: any) => acc.set(e, (acc.get(e) || 0) + 1), new Map())
+        const map = cart.reduce((acc: Map<number, number>, e: number) => acc.set(e, (acc.get(e) || 0) + 1), new Map())
         setPositionsMap(map)        
     }, [ ,cart])
 
@@ -52,7 +55,7 @@ const CartView = () => {
     }
 
     const handleWipeButton = () => {
-        dispatch(CartDispatcher.wipeCart())
+        dispatch(wipeCart())
     }
 
 
